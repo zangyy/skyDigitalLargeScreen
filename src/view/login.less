@@ -1,0 +1,78 @@
+.login{
+  width: 100%;
+  height: 100%;
+  background-image: url('@/assets/登录背景图.png');
+  background-size: 100% 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  .window{
+    width: 664px;
+    height: 532px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    .logo{
+      width:465px;
+      height: 50px;
+      margin-bottom: 60px;
+    }
+    .accountNumber,
+    .passWord{
+      width: 400px;
+      height: 50px;
+      border-radius: 38px;
+      background-color: #171A35;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 0 30px;
+      .input{
+        width: 280px;
+        height: 28px;
+        font-size: 16px;
+        background-color: #171A35;
+        color: #fff;
+        border: 0;
+        font-family: Tahoma;
+        // 去除选择框
+        outline: none;
+      }
+    }
+    .label{
+      cursor: pointer;
+      // 不可被选取
+      user-select: none;
+    }
+    .icon{
+      width: 28px;
+      height: 28px;
+      margin-right: 20px;
+    }
+    .loginBut{
+      width: 240px;
+      height: 50px;
+      background-color: #fff;
+      text-align: center;
+      line-height: 50px;
+      color: #000;
+      font-size: 20px;
+      font-weight: 600;
+      font-family: '黑体';
+      border-radius: 25px;
+      cursor: pointer;
+      // 不可被选取
+      user-select: none;
+      margin: 50px 60px 0 60px;
+      // 点击效果
+      &:active{
+        background-color: #ccc;
+      }
+    }
+  }
+}

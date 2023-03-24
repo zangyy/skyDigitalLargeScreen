@@ -1,0 +1,156 @@
+@Local-background-color: #2A3648;
+
+.main{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  .top,
+  .bottom{
+    width: 100%;
+  }
+  .top{
+    height: 490px;
+    margin-bottom: 24px;
+    background-color: #033263;
+  }
+  .bottom{
+    height: 446px;
+    display: flex;
+    justify-content: space-between;
+    
+    .left{
+      height: 100%;
+      width: 660px;
+      background-color: #1A2235;
+      .table{
+        box-sizing: border-box;
+        width: 100%;
+        height: calc(100% - 64px);
+        // padding: 20px;
+        margin-top: 10px;
+        table{
+          width: 100%;
+          border-spacing: 0;
+        }
+        th{
+          color: #0EDAD5;
+          font-size: 20px;
+          font-weight: normal;
+          line-height: 39px;
+          padding: 0;
+        }
+        tbody{
+          width: 100%;
+          tr{
+            text-align: center;
+            td{
+              font-size: 20px;
+              line-height: 39px;
+              padding: 0;
+            }
+            &:nth-child(2n+1){
+              background-color: #101623;
+            }
+          }
+        }
+        
+      }
+    }
+    .right{
+      height: 100%;
+      width: 1188px;
+      background-color: #1A2235;
+      .manufacturingBox{
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 27px;
+        height: calc(100% - 64px);
+      }
+    }
+  }
+  .container{
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(100% - 64px);
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    .table{
+      box-sizing: border-box;
+      width: 400px;
+      height: 370px;
+      background-color: #101623;
+      padding: 20px;
+      overflow: hidden;
+      table{
+        width: 100%;
+      }
+      th{
+        color: #0EDAD5;
+        font-size: 20px;
+        font-weight: normal;
+      }
+      tr{
+        text-align: center;
+        td{
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  .colorBlock {
+    font-weight: normal;
+    float: right;
+    display: flex;
+    .F {
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
+  
+      .purple,
+      .blue{
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+      }
+  
+      .purple {
+        background-image: linear-gradient(0deg, #8153FF 0%, #78A5FF 100%);
+      }
+  
+      .blue {
+        background-image: linear-gradient(228deg, #12FEE0 0%, #026DB2 100%);
+      }
+      .name {
+        font-size: 20px;
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+// 公用标题样式
+.titleBox {
+  padding: 17px 24px;
+  border-bottom: 1px solid rgba(221, 225, 238, .6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  .text {
+    font-size: 22px;
+    color: #ffffff;
+  }
+}
+.title{
+  font-size: 20px;
+  color: #fff;
+  font-weight: 600;
+}
+.quantity{
+  font-size: 46px;
+  font-weight: 900;
+  font-family: Arial-Black;
+}
