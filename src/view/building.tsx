@@ -438,7 +438,6 @@ export default function Building() {
   useEffect(() => {
     if (data) {
       console.log(data);
-
       data.forEach((item: any, index: number) => {
         echarts.init(window.document.getElementById(`manufacture${index}`) as HTMLElement).setOption(
           {
@@ -576,7 +575,7 @@ export default function Building() {
               axisLabel: {
                 show: true,
                 color: '#ffffff',
-                fontSize: 20,
+                fontSize: 18,
                 formatter: function (value: any) {
                   return `${value}节柱`;
                 }
@@ -597,7 +596,8 @@ export default function Building() {
                   type: 'dashed'
                 },
                 alignWithLabel: true
-              }
+              },
+              interval: 0 // X 轴刻度间隔为 1,
             },
             xAxis: {
               axisLabel: {
@@ -689,7 +689,7 @@ export default function Building() {
               axisLabel: {
                 show: true,
                 color: '#ffffff',
-                fontSize: 20,
+                fontSize: 18,
                 formatter: function (value: any) {
                   return `${value}节柱`;
                 }
@@ -710,7 +710,8 @@ export default function Building() {
                   type: 'dashed'
                 },
                 alignWithLabel: true
-              }
+              },
+              interval: 0 // X 轴刻度间隔为 1,
             },
             xAxis: {
               axisLabel: {
@@ -905,21 +906,36 @@ export default function Building() {
           }
         );
         if (Object.keys(item.model).length === 0) return false;
-        init(window.document.getElementById(`model${index}`), item.model.coord, item.model.colour, 'LINES', [-13274, -23000, -item.model.maxHigh - 4500], [10, 44, 0])
+        init(window.document.getElementById(`model${index}`), item.model.coord, item.model.colour, 'LINES', [-13274, -26500, -item.model.maxHigh - 9500], [10, 44, 0],[1,1,1])
         // if (index === 0) {
         //   init(window.document.getElementById(`model${index}`), item.model.coord, item.model.colour, 'LINES', [-13274, -16000, -item.model.maxHigh-4500], [10, 44, 0])
         // } else {
         //   init(window.document.getElementById(`model${index}`), item.model.coord, item.model.colour, 'LINES', [-13274, -23000, -item.model.maxHigh-4500], [10, 44, 0])
         // }
       })
+      document.addEventListener('click', function (e: any) {
+        var div = document.getElementsByClassName('enlargedImage');
+        if (e.target.className!='enlargedImage'&&e.target.className!='img') {
+          setHighlightedIndex(null);
+        }
+      })
     }
   }, [data])
   // 轮播按钮
   const pagination = {
     clickable: true,
-    renderBullet: function (index: any, className: any) {
-      return '<span class="' + className + '">' + (index + 1) + "</span>";
-    },
+    renderBullet:
+        function (index: any, className: any) {
+        return '<span class="' + className + '">' + (data?data[index].buildingNo:'') + "</span>";
+      },
+  };
+  const [highlightedIndex, setHighlightedIndex] = useState<number|null>(null);
+  const handleImageClick = (index: number | null) => {
+    if (index === highlightedIndex) {
+      setHighlightedIndex(null); // 取消高亮
+    } else {
+      setHighlightedIndex(index); // 设置高亮
+    }
   };
   return (
     <div className="building">
@@ -929,7 +945,7 @@ export default function Building() {
         loop={true}
         modules={[Autoplay, Pagination]}
         autoplay={{
-          delay: 10000, // 自动切换的时间间隔，单位为毫秒
+          delay: 30000, // 自动切换的时间间隔，单位为毫秒
           disableOnInteraction: true // 用户操作之后是否停止自动切换，默认为 true
         }}
         className="mySwiper"
@@ -969,8 +985,33 @@ export default function Building() {
                       </div>
                     </div>
                     <div style={{ width: '100%', textAlign: 'center', fontSize: '32px' }}>5D孪生模型</div>
+                    <div className='drawingContainer'>
+                      <div style={{textAlign:'center'}}>
+                        <div className={['drawing', 0 === highlightedIndex ? 'active' : null].join(' ')} onClick={() => handleImageClick(0)}>
+                          <img className='img' src={item.images[0]} alt="" />
+                        </div>
+                        <div className='name'>一节柱</div>
+                      </div>
+                      <div style={{textAlign:'center'}}>
+                        <div className={['drawing', 1 === highlightedIndex ? 'active' : null].join(' ')} onClick={() => handleImageClick(1)}>
+                          <img className='img' src={item.images[1]} alt="" />
+                        </div>
+                        <div className='name'>标准层</div>
+                      </div>
+                      <div style={{textAlign:'center'}}>
+                        <div className={['drawing', 2 === highlightedIndex ? 'active' : null].join(' ')} onClick={() => handleImageClick(2)}>
+                          <img className='img' src={item.images[2]} alt="" />
+                        </div>
+                        <div className='name'>屋面层</div>
+                      </div>
+                      {
+                        highlightedIndex == null? '' :
+                      <img  className='enlargedImage' src={highlightedIndex==null?'':item.images[highlightedIndex]} alt="" onBlur={() => handleImageClick(3)} />
+                          
+                      }
+                    </div>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                      <canvas id={`model${index}`} style={{ width: '430px', height: '720px', marginTop: '20px' }}></canvas>
+                      <canvas id={`model${index}`} style={{ width: '430px', height: '600px', marginTop: '20px' }}></canvas>
                     </div>
                   </div>
                   {/* <div className={['progress', index == data.length - 1 ? 'noBottom' : null].join(' ')}> */}

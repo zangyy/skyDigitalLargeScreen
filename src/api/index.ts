@@ -37,16 +37,9 @@ const getBlockPlan = (params:object)=> {
     params
   })
 }
-const getManufactureImg = (params:object)=> {
+const getImg = (params:object)=> {
   return axios({
-    url: '/LargeScreenDisplay/Parcel/GetMakePhoto',
-    method: 'get',
-    params
-  })
-}
-const getInstallImg = (params:object)=> {
-  return axios({
-    url: '/LargeScreenDisplay/Parcel/GetInstallPhoto',
+    url: '/LargeScreenDisplay/Parcel/GetLargeScreenPhoto',
     method: 'get',
     params
   })
@@ -55,6 +48,5 @@ export {
   getBuildingsData,
   getBuildingBlock,
   getBlockPlan,
-  getManufactureImg,
-  getInstallImg
+  getImg
 }

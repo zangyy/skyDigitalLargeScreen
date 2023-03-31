@@ -354,27 +354,31 @@ export default function Progress() {
             <div style={{width:'100px',height:'100px',marginTop:'10px'}} ref={percentageOfConstruction}></div>
           </div>
           <div className='table'>
-            <table>
-              <thead>
-                <tr>
-                  <th>日期</th>
-                  <th>计划完成</th>
-                  <th>实际完成</th>
-                </tr>
-              </thead>
-              <tbody >
-                {data?.installBeamColumnMonth?.map((item: any, index: number) => {
-                  return (
-                    <tr key={index}>
-                      <td style={{ color: '#a0a3a9', lineHeight: '40px'}}>{item.month}</td>
-                      <td>{item.planNumber}</td>
-                      <td>{item.realNumber}</td>
-                    </tr>
-                  )
-                }
-                )}
-              </tbody>
-            </table>
+            <div className='parcel'>
+              <table>
+                <thead>
+                  <tr>
+                    <th>月份</th>
+                    <th>计划完成</th>
+                    <th>实际完成</th>
+                  </tr>
+                </thead>
+                <tbody className='tbody'>
+                  {data?.installBeamColumnMonth?.map((item: any, index: number) => {
+                    return (
+                      item.planNumber==0&&item.realNumber==0?null:
+                      <tr key={index}>
+                        <td style={{ color: '#a0a3a9', lineHeight: '40px'}}>{item.month}</td>
+                        <td>{item.planNumber}</td>
+                        <td>{item.realNumber}</td>
+                      </tr>
+                    )
+                  }
+                  )}
+                </tbody>
+              </table>
+            </div>
+            
           </div>
           <div style={{ width: '1200px', height: '330px' }} ref={Construction}></div>
         </div>

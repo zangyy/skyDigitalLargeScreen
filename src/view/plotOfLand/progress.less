@@ -83,19 +83,34 @@
       height: 370px;
       background-color: #101623;
       padding: 20px;
-      overflow: hidden;
-      table{
+      // overflow: hidden;
+      
+      .parcel{
         width: 100%;
-      }
-      th{
-        color: #0EDAD5;
-        font-size: 20px;
-        font-weight: normal;
-      }
-      tr{
-        text-align: center;
-        td{
+        height: 100%;
+        overflow: auto;
+        // 滚动条样式
+        &::-webkit-scrollbar {
+          width: 0px;
+        }
+        table{
+          width: 100%;
+        }
+        thead{
+          position: sticky;
+          top: 0;
+          background-color: #101623;
+        }
+        th{
+          color: #0EDAD5;
           font-size: 20px;
+          font-weight: normal;
+        }
+        tr{
+          text-align: center;
+          td{
+            font-size: 20px;
+          }
         }
       }
     }

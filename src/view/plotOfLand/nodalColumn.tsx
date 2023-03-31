@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { Autoplay } from "swiper";
+import { Autoplay,Navigation } from "swiper";
 import './nodalColumn.less'
 import React, { useState, useEffect, useRef } from 'react'
 import { getBuildingBlock } from '@/api/index'
@@ -21,7 +21,7 @@ function NodalColumn() {
       data.forEach((item: any, index: number) => {
         // 模型是空的就不渲染
         if (Object.keys(item.model).length === 0) return false;
-        init(window.document.getElementById(`3d${index}`), data[index].model.coord, data[index].model.colour, 'TRIANGLES', [-800, -4400, -9000], [20, 60, 0])
+        init(window.document.getElementById(`3d${index}`), data[index].model.coord, data[index].model.colour, 'TRIANGLES', [-800, -4400, -9000], [20, 60, 0],[1,0.8,1])
       });
     }
   }, [data])
@@ -33,10 +33,11 @@ function NodalColumn() {
         // slidesPerGroup={1}
         spaceBetween={24}
         loop={true}
-        modules={[Autoplay]}
+        modules={[Autoplay, Navigation]}
+        navigation={true}
         autoplay={{
           delay: 5000, // 自动切换的时间间隔，单位为毫秒
-          disableOnInteraction: false // 用户操作之后是否停止自动切换，默认为 true
+          disableOnInteraction: true // 用户操作之后是否停止自动切换，默认为 true
         }}
       >
         {data.map((item: any, index: number) => {
@@ -49,32 +50,34 @@ function NodalColumn() {
                       <div className='NO'>{item.buildingNo}<span style={{ fontSize: '35px' }}>#</span></div>
                       <div className='headline'>节柱进度</div>
                       <div className='table'>
-                        <table>
-                          <thead>
-                            <tr>
-                              <th>节柱</th>
-                              <th>制造完成</th>
-                              <th>安装完成</th>
-                              <th>预计完成时间</th>
-                              <th>施工天数</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {item.segmentedColumnList ?
-                              item.segmentedColumnList.map((it: any, i: number) => {
-                                return (
-                                  <tr key={i}>
-                                    <td style={{ color: '#a0a3a9' }}>{it.sumSegmentedColumnNo}</td>
-                                    <td>{it.makeComplete}%</td>
-                                    <td>{it.installComplete}%</td>
-                                    <td>{it.installCompleteTime}</td>
-                                    <td>{it.days}</td>
-                                  </tr>
-                                )
-                              }) : null
-                            }
-                          </tbody>
-                        </table>
+                        <div className='parcel'>
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>节柱</th>
+                                <th>制造完成</th>
+                                <th>安装完成</th>
+                                <th>预计完成时间</th>
+                                <th>施工天数</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {item.segmentedColumnList ?
+                                item.segmentedColumnList.map((it: any, i: number) => {
+                                  return (
+                                    <tr key={i}>
+                                      <td style={{ color: '#a0a3a9' }}>{it.sumSegmentedColumnNo}</td>
+                                      <td>{it.makeComplete}%</td>
+                                      <td>{it.installComplete}%</td>
+                                      <td>{it.installCompleteTime}</td>
+                                      <td>{it.days}</td>
+                                    </tr>
+                                  )
+                                }) : null
+                              }
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
                     <div className='right'>
@@ -95,7 +98,7 @@ function NodalColumn() {
                         </div>
                       </div>
                       <div className='Model'>
-                        <canvas id={`3d${index}`} style={{ width: '250px', height: '580px'}} ref={webgl}></canvas>
+                        <canvas id={`3d${index}`} style={{ width: '250px', height: '580px' }} ref={webgl}></canvas>
                       </div>
                     </div>
                   </div>
@@ -103,7 +106,7 @@ function NodalColumn() {
                     <div className='deepen'>
                       <div className='title'>深化进度</div>
                       {
-                        item.deepeningProgress == '已完成'?<div className='flag'>{item.deepeningProgress}</div>:item.deepeningProgress=='未完成'?<div className='flag' style={{color:'#FF5353'}}>{item.deepeningProgress}</div>:<div className='flag' style={{ fontSize: '30px' }}>{item.deepeningProgress}</div>
+                        item.deepeningProgress == '已完成' ? <div className='flag'>{item.deepeningProgress}</div> : item.deepeningProgress == '未完成' ? <div className='flag' style={{ color: '#FF5353' }}>{item.deepeningProgress}</div> : <div className='flag' style={{ fontSize: '30px' }}>{item.deepeningProgress}</div>
                       }
                     </div>
                     <div className='manufacture'>

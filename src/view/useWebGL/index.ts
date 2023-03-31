@@ -51,10 +51,10 @@ function degToRad(d: any) {
 
 
 
-function init(canvas: any, SourceData: Array<number>, colorData: Array<number>, Type: string,translation:Array<number>,rotation:Array<number>) {
+function init(canvas: any, SourceData: Array<number>, colorData: Array<number>, Type: string,translation:Array<number>,rotation:Array<number>,scale:Array<number>) {
   var translation = translation; // 位置
   var rotation = [degToRad(rotation[0]), degToRad(rotation[1]), degToRad(rotation[2])]; // 旋转
-  var scale = [1, 0.9, 1]; // 缩放
+  // var scale = [1, 0.8, 1]; // 缩放
   // var color = [0, 0, 0, 1];
   var fieldOfViewRadians = degToRad(60); // 视距角度
 

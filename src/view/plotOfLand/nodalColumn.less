@@ -97,27 +97,41 @@
         width: 586px;
         height: 554px;
         background-color: #151c2b;
-
-        table {
+        // overflow: hidden;
+        .parcel{
           width: 100%;
-          border-spacing: 0;
-        }
-
-        th {
-          color: #0EDAD5;
-          font-size: 20px;
-          font-weight: normal;
-          padding: 0;
-          line-height: 55px;
-        }
-
-        tr {
-          text-align: center;
-
-          td {
+          height: 100%;
+          overflow: auto;
+          // 滚动条样式
+          &::-webkit-scrollbar {
+            width: 0px;
+          }
+          table {
+            width: 100%;
+            border-spacing: 0;
+          }
+          thead{
+            position: sticky;
+            top: 0;
+            background-color: #151c2b;
+            overflow-y: overlay;
+          }
+          th {
+            color: #0EDAD5;
             font-size: 20px;
-            line-height: 55px;
+            font-weight: normal;
             padding: 0;
+            line-height: 55px;
+          }
+  
+          tr {
+            text-align: center;
+  
+            td {
+              font-size: 20px;
+              line-height: 55px;
+              padding: 0;
+            }
           }
         }
       }
